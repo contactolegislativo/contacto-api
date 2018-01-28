@@ -12,7 +12,7 @@ var models  = require('../models');
 /* /api/legislature/LXIII/attendance/avg */
 router.get('/avg', function(req, res, next) {
   let queryString =
-    'select avg(quantity) as average, max(quantity) as max from seat_attendance';
+    'select avg(quantity) as average, max(quantity) as max, min(quantity) as min from seat_attendance';
 
   models.sequelize
   .query(queryString, {
