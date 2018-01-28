@@ -10,7 +10,7 @@ var models  = require('../models');
 /* /api/legislature/LXIII/deputy/<seatId>/attendance */
 router.get('/:id/attendance', function(req, res, next) {
   let queryString =
-    'select a.attendance as name, count(1) as value from Attendances a left outer join Deputies de on de.id = a.DeputyId left outer join Seats s on s.id = de.SeatId where s.id = :districtId group by a.attendance';
+    'select a.attendance as name, a.description, count(1) as value from Attendances a left outer join Deputies de on de.id = a.DeputyId left outer join Seats s on s.id = de.SeatId where s.id = :districtId group by a.attendance, a.description';
 
   models.sequelize
   .query(queryString, {
