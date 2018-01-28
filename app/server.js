@@ -7,7 +7,8 @@ var bodyParser = require('body-parser');
 var sessionInitalizer = require('./config/session');
 var env       = process.env.NODE_ENV || 'development';
 
-var attendance = require('./routes/index');
+var deputy = require('./routes/deputy');
+var attendance = require('./routes/attendance');
 
 var app = express();
 
@@ -19,7 +20,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/attendance', attendance);
+app.use('/legislature/LXIII/deputy', deputy);
+app.use('/legislature/LXIII/attendance', attendance);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
