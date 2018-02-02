@@ -9,6 +9,20 @@ var models  = require('../models');
   /api/legislature/LXIII/attendance/by_deputy_type
 */
 
+/* /api/legislature/LXIII/attendance */
+router.get('/', function(req, res, next) {
+  let queryString =
+    'select * from attendance_list order by entries desc';
+
+  models.sequelize
+  .query(queryString, {
+    type: models.sequelize.QueryTypes.SELECT
+  })
+  .then(function(result) {
+    res.json(result);
+  });
+});
+
 /* /api/legislature/LXIII/attendance/avg */
 router.get('/avg', function(req, res, next) {
   let queryString =
