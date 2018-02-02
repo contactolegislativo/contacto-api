@@ -40,7 +40,7 @@ router.get('/frequency', function(req, res, next) {
 /* /api/legislature/LXIII/attendance/by_party */
 router.get('/by_party', function(req, res, next) {
   let queryString =
-    'select party, avg(quantity) as average, count(1) as deputies from seat_attendance group by party order by average';
+    'select party, round(avg(quantity), 2) as average, max(quantity) as max, min(quantity) as min, round(avg(quantity) + stddev(quantity)/2, 2) as max_std, round(avg(quantity) - stddev(quantity)/2,2) as min_std, count(1) as deputies from seat_attendance group by party order by average';
 
   models.sequelize
   .query(queryString, {
