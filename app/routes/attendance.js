@@ -65,6 +65,20 @@ router.get('/by_party', function(req, res, next) {
   });
 });
 
+/* /api/legislature/LXIII/attendance/by_state */
+router.get('/by_state', function(req, res, next) {
+  let queryString =
+    'select state, round(avg(entries), 2) as average, max(entries) as max, min(entries) as min, round(avg(entries) + stddev(entries)/2, 2) as max_std, round(avg(entries) - stddev(entries)/2,2) as min_std, count(1) as deputies from attendance_list group by state order by average';
+
+  models.sequelize
+  .query(queryString, {
+    type: models.sequelize.QueryTypes.SELECT
+  })
+  .then(function(result) {
+    res.json(result);
+  });
+});
+
 /* /api/legislature/LXIII/attendance/by_deputy_type */
 router.get('/by_deputy_type', function(req, res, next) {
   let queryString =
