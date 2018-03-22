@@ -27,7 +27,10 @@
       "define": {
           "paranoid": true
       },
-      "logging": false
+      "logging": false,
+      "dialectOptions": {
+        "decimalNumbers": true
+      }
     },
     "redis" : {
       "host": "redis",
